@@ -19,11 +19,17 @@ app.use(function (req, res, next) {
 
 //import categories
 const RestController = require('./controllers/categories')
+const ArticleController = require('./controllers/articles')
 
 app.group("/api/v1", (router) => {
 
     //GET list route: simply send arr of obj categories on your user screen
     router.get('/categories', RestController.index)
+
+    //GET articles 
+    router.get('/articles', ArticleController.index)
+    //GET articles limit 10 order by desc
+    router.get('/articles/:populer', ArticleController.show_latest)
 
     //GET detail route: send the category obj, by received name request params
     router.get('/category/:name', RestController.show)
