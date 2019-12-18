@@ -78,7 +78,7 @@ exports.show_latest = (req, res) => {
 //     //     success: true,
 //     //     data: req.body
 //     // })
-
+//
 //     Rest.update(
 //         req.body,
 //         { where: { id: req.params.id } }

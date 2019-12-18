@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     is_archived: DataTypes.INTEGER,
     article_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    comment: DataTypes.TEXT
+    comment: DataTypes.TEXT//
   }, {});
   comment.associate = function (models) {
     // associations can be defined here!
