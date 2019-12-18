@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       is_archived: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER//
       },
       article_id: {
         type: Sequelize.INTEGER,

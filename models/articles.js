@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     author_id: DataTypes.INTEGER
   }, {});
   articles.associate = function (models) {
-    articles.belongsTo(models.categories, {
+    articles.belongsTo(models.categories, { //ASSOSIATION WITH CATEGORI
       as: 'categoryId',
       foreignKey: 'category_id'
     })

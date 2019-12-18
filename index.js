@@ -34,7 +34,7 @@ app.group("/api/v1", (router) => {
     //GET detail route: send the category obj, by received name request params
     router.get('/category/:name', RestController.show)
 
-    //POST route: menambahkan data ke rest api
+    //POST route: menambahkan data ke rest API
     router.post('/category', RestController.store)
 
     //PATCH route: update data

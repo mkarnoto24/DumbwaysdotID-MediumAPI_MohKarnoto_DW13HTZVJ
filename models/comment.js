@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     comment: DataTypes.TEXT
   }, {});
-  comment.associate = function(models) {
-    // associations can be defined here
+  comment.associate = function (models) {
+    // associations can be defined here!
   };
   return comment;
 };

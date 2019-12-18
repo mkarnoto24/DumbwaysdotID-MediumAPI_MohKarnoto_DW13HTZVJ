@@ -18,6 +18,8 @@ exports.index = (req, res) => {
         ]
     }).then(article => res.send(article))
 }
+
+//10 ARTIKEL TERAKHIR
 exports.show_latest = (req, res) => {
 
     Article.findAll({
