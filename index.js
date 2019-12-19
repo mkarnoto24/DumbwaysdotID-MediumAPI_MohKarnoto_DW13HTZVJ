@@ -34,6 +34,9 @@ app.group("/api/v1", (router) => {
     //GET detail route: send the category obj, by received name request params
     router.get('/category/:name', RestController.show)
 
+    //GET ARTICLE BY CATEGORY
+    router.get('/category/:id/articles', ArticleController.show_by_categoryId)
+
     //POST route: menambahkan data ke rest API
     router.post('/category', RestController.store)
 
