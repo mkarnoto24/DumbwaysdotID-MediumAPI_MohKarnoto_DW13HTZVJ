@@ -13,39 +13,29 @@ app.use(bodyParser.json())
 //enable CORS 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
 //import categories
-const RestController = require('./controllers/categories')
+const CategoryController = require('./controllers/categories')
 const ArticleController = require('./controllers/articles')
 
 app.group("/api/v1", (router) => {
 
-    //GET list route: simply send arr of obj categories on your user screen
-    router.get('/categories', RestController.index)
+    // CATEGORY ROUTER
+    router.get('/categories', CategoryController.index) //get all
+    router.get('/category/:name', CategoryController.show) // get by name
+    router.post('/category', CategoryController.store) // add category
+    router.patch('/category/:id', CategoryController.update) //update category
+    router.delete('/category/:id', CategoryController.delete) //delete category
 
-    //GET articles 
-    router.get('/articles', ArticleController.index)
-    //GET articles limit 10 order by desc
-    router.get('/articles/:populer', ArticleController.show_latest)
+    //ARTICLE ROUTER
+    router.get('/articles', ArticleController.index) //get all
+    router.get('/articles/:populer', ArticleController.showLatest) //get latest article limit 10
+    router.get('/category/:id/articles', ArticleController.showByCategoryId) //get by category
+    router.get('/article/:id', ArticleController.showByArticleId) //get by id article
 
-    //GET detail route: send the category obj, by received name request params
-    router.get('/category/:name', RestController.show)
-
-    //GET ARTICLE BY CATEGORY
-    router.get('/category/:id/articles', ArticleController.show_by_categoryId)
-
-    //POST route: menambahkan data ke rest API
-    router.post('/category', RestController.store)
-
-    //PATCH route: update data
-    //by object id
-    router.patch('/category/:id', RestController.update)
-
-    //DELETE route: delete the category obj, by received id request params
-    router.delete('/category/:id', RestController.delete)
 
 })
 

@@ -19,6 +19,7 @@ exports.index = (req, res) => {
 
     /*======== use sequelize query====== */
     Rest.findAll().then(categories => res.send(categories))
+        .catch(err => res.send(err))
 }
 exports.show = (req, res) => {
     // connection.query(`SELECT * FROM categories WHERE id=${req.params.id}`, (err, rows) => {
@@ -27,7 +28,9 @@ exports.show = (req, res) => {
     //     res.send(rows[0])
     // })
 
-    Rest.findOne({ where: { name: req.params.name } }).then(category => res.send(category))
+    Rest.findOne({ where: { name: req.params.name } })
+        .then(category => res.send(category))
+        .catch(err => res.send(err))
 }
 exports.store = (req, res) => {
     // const { name, is_published, is_archived } = req.body

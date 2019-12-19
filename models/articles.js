@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       as: 'authorId',
       foreignKey: 'author_id'
     })
+    articles.hasMany(models.comment, {
+      as: 'commentId',
+      foreignKey: 'article_id'
+    })
 
     // associations can be defined here
   };

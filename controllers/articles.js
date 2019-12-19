@@ -2,6 +2,7 @@
 const Category = require('../models').categories  //import categories models 
 const Article = require('../models').articles //import articles models 
 const User = require('../models').users //import users models 
+const Comment = require('../models').comment //import users models 
 
 exports.index = (req, res) => {
 
@@ -16,11 +17,11 @@ exports.index = (req, res) => {
                 as: "authorId"
             },
         ]
-    }).then(article => res.send(article))
+    }).then(article => res.send(article)).catch(err => res.send(err))
 }
 
 //10 ARTIKEL TERAKHIR
-exports.show_latest = (req, res) => {
+exports.showLatest = (req, res) => {
 
     Article.findAll({
         include: [
@@ -34,12 +35,13 @@ exports.show_latest = (req, res) => {
             },
         ],
         order: [
+            ['id', 'DESC'],
             ['createdAt', 'DESC']
         ],
         limit: 10
-    }).then(article => res.send(article))
+    }).then(article => res.send(article)).catch(err => res.send(err))
 }
-exports.show_by_categoryId = (req, res) => {
+exports.showByCategoryId = (req, res) => {
 
     Article.findAll({
         include: [
@@ -52,5 +54,30 @@ exports.show_by_categoryId = (req, res) => {
                 as: "authorId"
             }
         ], where: { category_id: req.params.id }
+    }).then(articles => res.send(articles)).catch(err => res.send(err))
+}
+exports.showByArticleId = (req, res) => {
+
+    Article.findOne({
+        include: [
+            {
+                model: Category,
+                as: "categoryId",
+                include: [
+                    {
+                        model: Article,
+                        as: "articlesId"
+                    }
+                ]
+            },
+            {
+                model: User,
+                as: "authorId"
+            },
+            {
+                model: Comment,
+                as: "commentId"
+            }
+        ], where: { id: req.params.id }
     }).then(articles => res.send(articles)).catch(err => res.send(err))
 }
