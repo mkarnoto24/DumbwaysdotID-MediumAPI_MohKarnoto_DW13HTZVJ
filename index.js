@@ -17,24 +17,36 @@ app.use(function (req, res, next) {
     next();
 });
 
-//import categories
+
+//import controller
+const { authenticated } = require('./middleware')
+const AuthController = require('./controllers/auth')
 const CategoryController = require('./controllers/categories')
 const ArticleController = require('./controllers/articles')
+//middlewares
+
+
 
 app.group("/api/v1", (router) => {
+
+    //auth API
+    router.post('/login', AuthController.login)
 
     // CATEGORY ROUTER
     router.get('/categories', CategoryController.index) //get all
     router.get('/category/:name', CategoryController.show) // get by name
-    router.post('/category', CategoryController.store) // add category
-    router.patch('/category/:id', CategoryController.update) //update category
-    router.delete('/category/:id', CategoryController.delete) //delete category
+    router.post('/category', authenticated, CategoryController.store) // add category
+    router.patch('/category/:id', authenticated, CategoryController.update) //update category
+    router.delete('/category/:id', authenticated, CategoryController.delete) //delete category
 
     //ARTICLE ROUTER
     router.get('/articles', ArticleController.index) //get all
     router.get('/articles/:populer', ArticleController.showLatest) //get latest article limit 10
     router.get('/category/:id/articles', ArticleController.showByCategoryId) //get by category
     router.get('/article/:id', ArticleController.showByArticleId) //get by id article
+    router.post('/article', authenticated, ArticleController.store) //add article
+    router.patch('/article/:id', authenticated, ArticleController.update) //update article
+    router.delete('/article/:id', authenticated, ArticleController.delete) //delete article
 
 
 })

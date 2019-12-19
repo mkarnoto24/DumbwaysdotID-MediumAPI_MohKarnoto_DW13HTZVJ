@@ -80,4 +80,35 @@ exports.showByArticleId = (req, res) => {
             }
         ], where: { id: req.params.id }
     }).then(articles => res.send(articles)).catch(err => res.send(err))
+
+
+}
+exports.store = (req, res) => {
+    Article.create(req.body).then(article => {
+        res.send({
+            message: "success",
+            article
+        })
+    }).catch(err => res.send(err))
+
+}
+exports.update = (req, res) => {
+    Article.update(
+        req.body,
+        { where: { id: req.params.id } }
+    ).then(article => {
+        res.send({
+            message: "success",
+            article
+        })
+    })
+}
+exports.delete = (req, res) => {
+
+    Article.destroy({ where: { id: req.params.id } }).then(id => {
+        res.send({
+            message: "success",
+            id
+        })
+    })
 }
