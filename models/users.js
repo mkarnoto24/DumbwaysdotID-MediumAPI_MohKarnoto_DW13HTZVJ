@@ -7,8 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     is_active: DataTypes.INTEGER
   }, {});
-  users.associate = function(models) {
+  users.associate = function (models) {
     // associations can be defined here
+    users.hasMany(models.follow, {
+      as: 'userId',
+      foreignKey: 'user_id'
+    })
   };
   return users;
 };

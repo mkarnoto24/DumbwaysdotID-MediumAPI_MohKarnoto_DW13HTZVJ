@@ -24,6 +24,7 @@ const AuthController = require('./controllers/auth')
 const CategoryController = require('./controllers/categories')
 const ArticleController = require('./controllers/articles')
 const CommentController = require('./controllers/comment')
+const FollowController = require('./controllers/follow')
 
 
 
@@ -52,8 +53,10 @@ app.group("/api/v1", (router) => {
     router.post('/article/:id/comment', authenticated, CommentController.add) //add comment pada detail artikel
     router.put('/article/:id/comment', authenticated, CommentController.update) //update comment pada detail artikel
     router.delete('/article/:id/comment', authenticated, CommentController.delete) //delete comment pada detail artikel
-    router.get('/article/:id/comments', authenticated, CommentController.show) //delete comment pada detail artikel
+    router.get('/article/:id/comments', authenticated, CommentController.show) //show all comment pada detail artikel
 
+    //ROUTER FOLLOW
+    router.post('/follow', authenticated, FollowController.add) //add follow
 
 })
 

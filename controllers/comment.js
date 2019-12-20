@@ -1,6 +1,6 @@
 const Comment = require('../models').comment
 const Article = require('../models').articles //import articles models 
-const User = require('../models').users //import users models 
+//const User = require('../models').users //import users models 
 
 
 //  
