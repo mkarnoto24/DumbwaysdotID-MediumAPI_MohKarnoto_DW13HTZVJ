@@ -23,7 +23,7 @@ const { authenticated } = require('./middleware')
 const AuthController = require('./controllers/auth')
 const CategoryController = require('./controllers/categories')
 const ArticleController = require('./controllers/articles')
-//middlewares
+const CommentController = require('./controllers/comment')
 
 
 
@@ -47,6 +47,12 @@ app.group("/api/v1", (router) => {
     router.post('/article', authenticated, ArticleController.store) //add article
     router.patch('/article/:id', authenticated, ArticleController.update) //update article
     router.delete('/article/:id', authenticated, ArticleController.delete) //delete article
+
+    //ROUTER COMMENT
+    router.post('/article/:id/comment', authenticated, CommentController.add) //add comment pada detail artikel
+    router.put('/article/:id/comment', authenticated, CommentController.update) //update comment pada detail artikel
+    router.delete('/article/:id/comment', authenticated, CommentController.delete) //delete comment pada detail artikel
+    router.get('/article/:id/comments', authenticated, CommentController.show) //delete comment pada detail artikel
 
 
 })

@@ -1,4 +1,3 @@
-
 const Category = require('../models').categories  //import categories models 
 const Article = require('../models').articles //import articles models 
 const User = require('../models').users //import users models 
