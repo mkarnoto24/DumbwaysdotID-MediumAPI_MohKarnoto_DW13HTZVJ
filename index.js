@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 require('express-group-routes')
 
 const app = express()
-const port = 4000
+const port = process.env.PORT || 4000
 
 //allow this app to receive incoming json request
 app.use(bodyParser.json())
