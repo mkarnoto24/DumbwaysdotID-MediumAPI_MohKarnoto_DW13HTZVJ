@@ -3,7 +3,7 @@
 // const Rest = models.categories
 
 // exports.index = (req, res) => {
-//     Rest.findAll().then(categories => res.send(categories))
+//   /  Rest.findAll().then(categories => res.send(categories))
 // }
 const Rest = require('../models').categories
 

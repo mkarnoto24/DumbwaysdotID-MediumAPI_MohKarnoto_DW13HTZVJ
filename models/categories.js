@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     is_published: DataTypes.INTEGER,
     is_archived: DataTypes.INTEGER
   }, {});
-  categories.associate = function(models) {
-    // associations can be defined here
+  categories.associate = function (models) {
+    // associations can be defined here.
   };
   return categories;
 };
