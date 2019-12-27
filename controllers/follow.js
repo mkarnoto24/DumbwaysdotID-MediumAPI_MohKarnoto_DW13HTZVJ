@@ -1,5 +1,5 @@
 const Follow = require('../models').follow
-const User = require('../models').users
+//const User = require('../models').users
 
 exports.add = (req, res) => {
     Follow.create(req.body)

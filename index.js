@@ -1,11 +1,11 @@
 const express = require('express')
-
+//var cors = require('cors')
 //init bodyParser
 const bodyParser = require('body-parser')
 require('express-group-routes')
 
 const app = express()
-const port = 4000
+const port = process.env.PORT || 4000
 
 //allow this app to receive incoming json request
 app.use(bodyParser.json())
@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 //enable CORS 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
@@ -25,6 +25,7 @@ const CategoryController = require('./controllers/categories')
 const ArticleController = require('./controllers/articles')
 const CommentController = require('./controllers/comment')
 const FollowController = require('./controllers/follow')
+const UsersController = require('./controllers/users')
 
 
 
@@ -36,6 +37,7 @@ app.group("/api/v1", (router) => {
     // CATEGORY ROUTER
     router.get('/categories', CategoryController.index) //get all
     router.get('/category/:name', CategoryController.show) // get by name
+
     router.post('/category', authenticated, CategoryController.store) // add category
     router.patch('/category/:id', authenticated, CategoryController.update) //update category
     router.delete('/category/:id', authenticated, CategoryController.delete) //delete category
@@ -57,6 +59,11 @@ app.group("/api/v1", (router) => {
 
     //ROUTER FOLLOW
     router.post('/follow', authenticated, FollowController.add) //add follow
+
+    //ROUTER ARTICLE BY USER
+    router.get('/user/:id/articles', authenticated, UsersController.showArticleByUser)
+    router.delete('/user/:id/articles', authenticated, UsersController.delete)
+
 
 })
 
